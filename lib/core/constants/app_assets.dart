@@ -1,0 +1,1 @@
+///Image paths, SVG strings
