@@ -24,7 +24,7 @@ class CustomBottomNavBar extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // 1. HOME
+            // HOME
             _buildNavItem(
               context, ref,
               index: 0,
@@ -33,7 +33,7 @@ class CustomBottomNavBar extends ConsumerWidget {
               iconUnselected: CupertinoIcons.house,
             ),
 
-            // 2. SEARCH
+            // SEARCH
             _buildNavItem(
               context, ref,
               index: 1,
@@ -44,7 +44,7 @@ class CustomBottomNavBar extends ConsumerWidget {
 
             ),
 
-            // 3. CREATE
+            //  CREATE
             _buildNavItem(
               context, ref,
               index: 2,
@@ -53,7 +53,7 @@ class CustomBottomNavBar extends ConsumerWidget {
               iconUnselected: CupertinoIcons.add,
             ),
 
-            // 4. INBOX
+            //  INBOX
             _buildNavItem(
               context, ref,
               index: 3,
@@ -62,7 +62,7 @@ class CustomBottomNavBar extends ConsumerWidget {
               iconUnselected: CupertinoIcons.chat_bubble_text,
             ),
 
-            // 5. SAVED / PROFILE
+            //  PROFILE
             _buildNavItem(
               context, ref,
               index: 4,
@@ -90,22 +90,17 @@ class CustomBottomNavBar extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        // Update the provider to switch screens
         ref.read(navIndexProvider.notifier).state = index;
       },
-      behavior: HitTestBehavior.opaque, // Makes touch area better
+      behavior: HitTestBehavior.opaque,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             isSelected ? iconSelected : iconUnselected,
-            // USER REQUIREMENT: All icons black
             color: AppColors.black,
-            // If it's search, we might make it slightly larger/bolder manually if needed
             size: (isBoldWhenSelected && isSelected ? iconSize + 1 : iconSize).sp(context),
-            // Optional: If you want unselected to be slightly lighter black (dark grey) for hierarchy:
-            // color: isSelected ? AppColors.black : Colors.black54,
           ),
           SizedBox(height: 4.h(context)),
           Text(
@@ -113,7 +108,7 @@ class CustomBottomNavBar extends ConsumerWidget {
             style: GoogleFonts.poppins(
               fontSize: 11.sp(context),
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-              // USER REQUIREMENT: Text also black
+
               color: AppColors.black,
             ),
           ),

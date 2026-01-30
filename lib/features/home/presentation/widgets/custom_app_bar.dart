@@ -8,30 +8,26 @@ import '../../../../core/constants/app_colors.dart';
 
 Widget buildCustomAppBar(BuildContext context) {
   return Padding(
-    // Responsive padding
     padding: EdgeInsets.symmetric(
       horizontal: 16.w(context),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // "For You" Section
         Column(
           children: [
             Text(
               "For you",
-              style: GoogleFonts.poppins( // Changed to Poppins
-                fontSize: 15.sp(context), // Responsive Font Size
+              style: GoogleFonts.poppins(
+                fontSize: 15.sp(context),
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
               ),
             ),
-            SizedBox(height: 4.h(context)), // Responsive spacing
-
-            // The Black Underline Indicator
+            SizedBox(height: 4.h(context)),
             Container(
               height: 3.h(context),
-              width: 45.w(context), // Responsive width
+              width: 45.w(context),
               decoration: BoxDecoration(
                 color: AppColors.black,
                 borderRadius: BorderRadius.circular(10),
@@ -40,12 +36,11 @@ Widget buildCustomAppBar(BuildContext context) {
           ],
         ),
 
-        // Settings / Logout Icon
         IconButton(
           icon: Icon(
             Icons.logout,
             color: AppColors.grey,
-            size: 24.sp(context), // Responsive Icon Size
+            size: 24.sp(context),
           ),
           onPressed: () async {
             await ClerkAuth.of(context).signOut();

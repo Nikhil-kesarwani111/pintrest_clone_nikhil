@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// Import other screens here when you create them
-// import 'package:pintrest_clone_nikhil/features/search/presentation/screens/search_screen.dart';
-
 import '../../../core/constants/app_colors.dart';
 import '../../../global/navigation/bottom_nav_bar.dart';
 import '../../../global/provider/nav_provider.dart';
@@ -27,7 +24,6 @@ class MainScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
 
-      // IndexedStack preserves the state of pages (doesn't reload Home when you go to Search)
       body: IndexedStack(
         index: currentIndex,
         children: pages,
