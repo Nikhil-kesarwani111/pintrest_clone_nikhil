@@ -1,13 +1,14 @@
 ///Store Pexels API Key & Base URL here
 
 
-import 'secrets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class ApiConstants {
   static const String baseUrl = 'https://api.pexels.com';
 
 
-  static const String apiKey = Secrets.pexelsApiKey;
+  static final String apiKey = dotenv.env['PEXELS_API_KEY']!;
 
   // Photo Endpoints
   static const String curatedPhotos = '/v1/curated';

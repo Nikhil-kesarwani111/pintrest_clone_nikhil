@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'core/router/app_router.dart';
+import 'package:pintrest_clone_nikhil/core/router/app_router.dart';
 import 'core/constants/app_colors.dart';
 
-class PinterestCloneApp extends ConsumerWidget {
+class PinterestCloneApp extends StatelessWidget{
   const PinterestCloneApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final goRouter = ref.watch(routerProvider);
+  Widget build(BuildContext context) {
 
     return MaterialApp.router(
       title: 'Pinterest Clone',
       debugShowCheckedModeBanner: false,
-      routerConfig: goRouter,
+      routerConfig: router,
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.white,
@@ -34,6 +32,7 @@ class PinterestCloneApp extends ConsumerWidget {
           ),
         ),
       ),
+
     );
   }
 }

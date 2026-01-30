@@ -8,20 +8,21 @@ abstract class Failure {
 
 /// Used when the server returns an error (mapped from ServerException).
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  const ServerFailure({required String message}) : super(message);
 }
 
 /// Used when internet is down (mapped from NetworkException).
 class NetworkFailure extends Failure {
-  const NetworkFailure([super.message = 'Please check your internet connection']);
+  const NetworkFailure({String message = 'Please check your internet connection'})
+      : super(message);
 }
 
 /// Used when loading locally saved data fails.
 class CacheFailure extends Failure {
-  const CacheFailure(super.message);
+  const CacheFailure({String message = 'Cache Failure'}) : super(message);
 }
 
 /// Used when login/signup fails  ("Invalid password").
 class AuthFailure extends Failure {
-  const AuthFailure(super.message);
+  const AuthFailure({required String message}) : super(message);
 }

@@ -38,8 +38,11 @@ dependencies:
   dio: ^5.9.1
   provider: ^6.1.5+1
   flutter_riverpod: ^2.6.1
+  flutter_staggered_grid_view: ^0.7.0
+  flutter_dotenv: ^6.0.0
   clerk_flutter: ^0.0.13-beta
-
+  clerk_auth: ^0.0.13-beta
+  app_links: ^6.4.1
 
 
 dev_dependencies:
@@ -65,9 +68,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - .env
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
