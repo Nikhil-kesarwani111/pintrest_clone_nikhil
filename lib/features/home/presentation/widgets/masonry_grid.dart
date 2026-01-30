@@ -66,23 +66,20 @@ class MasonryGrid extends ConsumerWidget {
         }
         return false;
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w(context)),
-        child: MasonryGridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10.h(context),
-          crossAxisSpacing: 10.w(context),
-          itemCount: pins.length + (homeState.isLoading ? 1 : 0),
-          itemBuilder: (context, index) {
-            if (index == pins.length) {
-              return const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Center(child: CircularProgressIndicator()),
-              );
-            }
-            return PinCard(pin: pins[index]);
-          },
-        ),
+      child: MasonryGridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10.h(context),
+        crossAxisSpacing: 10.w(context),
+        itemCount: pins.length + (homeState.isLoading ? 1 : 0),
+        itemBuilder: (context, index) {
+          if (index == pins.length) {
+            return const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+          return PinCard(pin: pins[index]);
+        },
       ),
     );
   }

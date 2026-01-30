@@ -2,6 +2,7 @@
 import 'package:clerk_flutter/clerk_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pintrest_clone_nikhil/features/Navigation/Screens/main_screen.dart';
 import 'package:pintrest_clone_nikhil/features/auth/presentation/screens/auth_screen.dart';
 import 'package:pintrest_clone_nikhil/features/auth/presentation/screens/clerk_auth_screen.dart';
 import 'package:pintrest_clone_nikhil/features/home/presentation/screens/home.dart';
@@ -50,7 +51,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/home',
       name: 'home',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const MainScreen(),
     ),
   ],
 );
