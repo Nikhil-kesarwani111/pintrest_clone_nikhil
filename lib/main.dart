@@ -16,8 +16,6 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-
-
   // Load environment variables
   await dotenv.load(fileName: ".env");
 

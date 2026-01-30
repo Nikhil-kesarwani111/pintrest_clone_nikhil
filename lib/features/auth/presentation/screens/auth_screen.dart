@@ -1,6 +1,7 @@
 import 'package:clerk_flutter/clerk_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 
 import '../widgets/ AuthHeaderCollage/AuthHeaderCollage.dart'; // Check path
 
@@ -20,7 +21,7 @@ class AuthScreen extends StatelessWidget {
         child: Column(
           children: [
             if (!isKeyboardOpen)
-              const AuthHeaderCollage(),
+              SizedBox(child: const AuthHeaderCollage(), height: 300.h(context)),
             Expanded(
               child: Center(
                 child: InkWell(
