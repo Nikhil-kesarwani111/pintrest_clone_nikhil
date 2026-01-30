@@ -12,29 +12,35 @@ final GoRouter router = GoRouter(
   redirect: (BuildContext context, GoRouterState state) {
     final clerk = ClerkAuth.of(context);
     final isSignedIn = clerk.isSignedIn;
+    final currentPath = state.matchedLocation;
 
-    final isGoingToLogin = state.matchedLocation == '/clerkAuth';
-    final isGoingToHome = state.matchedLocation == '/home';
-    final isGoingToRoot = state.matchedLocation == '/';
-
-    // If not signed in and trying to access home, redirect to root
-    if (!isSignedIn && isGoingToHome) {
-      return '/';
-    }
-
-    // If signed in and on login page, redirect to home
-    if (isSignedIn && isGoingToLogin) {
+    // If signed in and on auth pages, go to home
+    if (isSignedIn && (currentPath == '/' || currentPath == '/clerkAuth')) {
       return '/home';
     }
 
+    // If not signed in and trying to access home, go to root
+    if (!isSignedIn && currentPath == '/home') {
+      return '/';
+    }
     // No redirect needed
     return null;
   },
   routes: [
+
     GoRoute(
       path: '/',
       name: 'landing',
       builder: (context, state) => const AuthScreen(),
+    ),
+    GoRoute(
+      path: '/splash',
+      name: 'splash',
+      builder: (context, state) => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     ),
     GoRoute(
       path: '/clerkAuth',
