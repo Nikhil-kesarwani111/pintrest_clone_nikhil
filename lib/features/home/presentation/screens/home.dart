@@ -18,7 +18,7 @@ class HomeScreen extends ConsumerWidget {
 
             const Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: EdgeInsets.symmetric(horizontal: 4.0),
                 child: MasonryGrid(),
               ),
             ),
