@@ -63,25 +63,6 @@ class PinCard extends StatelessWidget {
               ),
             ),
 
-            if (pin.isVideo)
-              Positioned(
-                bottom: 8,
-                left: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: const Text(
-                    "0:15", // You could make this dynamic if API provides duration
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
           ],
         ),
         SizedBox(height: 5.h(context)),

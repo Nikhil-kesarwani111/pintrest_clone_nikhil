@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -23,6 +25,8 @@ class _VideoPinState extends State<VideoPin> {
   bool _isInitialized = false;
   bool _hasError = false;
 
+  bool _isMuted = true;
+
   @override
   void dispose() {
     _controller?.dispose();
@@ -40,7 +44,7 @@ class _VideoPinState extends State<VideoPin> {
         setState(() {
           _isInitialized = true;
           _controller!.setLooping(true);
-          _controller!.setVolume(0.0);
+          _controller!.setVolume(_isMuted ? 0.0 : 1.0);
           _controller!.play();
         });
       }
@@ -54,8 +58,15 @@ class _VideoPinState extends State<VideoPin> {
     }
   }
 
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${duration.inMinutes}:$twoDigitSeconds";
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return VisibilityDetector(
       key: Key(widget.videoUrl),
       onVisibilityChanged: (visibilityInfo) {
@@ -69,7 +80,6 @@ class _VideoPinState extends State<VideoPin> {
             _controller?.play();
           }
         } else {
-          // Pause when scrolling away
           if (_isInitialized && _controller?.value.isPlaying == true) {
             _controller?.pause();
           }
@@ -77,14 +87,69 @@ class _VideoPinState extends State<VideoPin> {
       },
       child: AspectRatio(
         aspectRatio: widget.aspectRatio,
-        child: Container(
-          color: widget.placeholderColor, // Solid Background Color
-          alignment: Alignment.center,
-          child: _hasError
-              ? const Icon(Icons.broken_image, color: Colors.white54)
-              : _isInitialized
-              ? VideoPlayer(_controller!)
-              : const SizedBox(), // Empty because Container color handles the UI
+        child: Stack(
+          children: [
+            Container(
+              color: widget.placeholderColor,
+              alignment: Alignment.center,
+              child: _hasError
+                  ? const Icon(Icons.broken_image, color: Colors.white54)
+                  : _isInitialized
+                  ? VideoPlayer(_controller!)
+                  : const SizedBox(),
+            ),
+            if (_isInitialized) ...[
+              // TOP LEFT: Timer
+              Positioned(
+                top: 10.h(context),
+                left: 10.w(context),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 8.w(context),
+                      vertical: 4.h(context)
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.9), // White Pill
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    _formatDuration(_controller!.value.duration),
+                    style: TextStyle(
+                      color: Colors.black, // Black Text
+                      fontSize: 11.sp(context),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+
+              // TOP RIGHT: Mute Toggle
+              Positioned(
+                top: 5.h(context),
+                right: 5.w(context),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isMuted = !_isMuted;
+                      _controller?.setVolume(_isMuted ? 0.0 : 1.0);
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.2), // Subtle dark circle
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _isMuted ? Icons.volume_off : Icons.volume_up,
+                      color: Colors.white,
+                      size: 18.sp(context),
+                    ),
+                  ),
+                ),
+              ),
+            ]
+          ],
         ),
       ),
     );
