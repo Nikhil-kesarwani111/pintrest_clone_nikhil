@@ -10,27 +10,30 @@ class ClerkAuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: ClerkAuthBuilder(
-          signedInBuilder: (context, authState) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (context.mounted) {
-                context.go('/home');
-              }
-            });
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-          signedOutBuilder: (context, authState) {
-            return Column(
-              children: [
-                Expanded(child: const ClerkAuthentication()),
-              ],
-            );
-          },
+    return PopScope(
+      canPop: true,
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: ClerkAuthBuilder(
+            signedInBuilder: (context, authState) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (context.mounted) {
+                  context.go('/home');
+                }
+              });
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            signedOutBuilder: (context, authState) {
+              return Column(
+                children: [
+                  Expanded(child: const ClerkAuthentication()),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
