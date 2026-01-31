@@ -7,10 +7,18 @@ import '../../../../global/widgets/Pin_option_bottom_sheet/Presentation/screen/p
 import '../../domain/entities/pin_entity.dart';
 import 'video_pin.dart';
 
+// Import the new button
+import 'pin_overlay_button.dart';
+
 class PinCard extends StatelessWidget {
   final PinEntity pin;
+  final bool showOverlay; // New flag to control visibility
 
-  const PinCard({super.key, required this.pin});
+  const PinCard({
+    super.key,
+    required this.pin,
+    this.showOverlay = false, // Default to false for Home Screen
+  });
 
   Color _parseColor(String hexString) {
     try {
@@ -32,33 +40,28 @@ class PinCard extends StatelessWidget {
     final double aspectRatio = (pin.width / pin.height);
 
     return GestureDetector(
-      onTap: () {
-        context.push('/pin_detail', extra: pin);
-      },
+      onTap: () => context.push('/pin_detail', extra: pin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Stack(
             children: [
+              // 1. The Image/Video
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: pin.isVideo
                     ? VideoPin(
                   videoUrl: pin.videoUrl!,
                   placeholderColor: color,
-                  aspectRatio: aspectRatio, // Pass ratio to Video
+                  aspectRatio: aspectRatio,
                 )
                     : CachedNetworkImage(
                   imageUrl: pin.imageUrl,
                   fit: BoxFit.cover,
-      
                   placeholder: (context, url) => AspectRatio(
                     aspectRatio: aspectRatio,
-                    child: Container(
-                      color: color, // The static dominant color box
-                    ),
+                    child: Container(color: color),
                   ),
-      
                   errorWidget: (context, url, error) => AspectRatio(
                     aspectRatio: aspectRatio,
                     child: Container(
@@ -68,25 +71,35 @@ class PinCard extends StatelessWidget {
                   ),
                 ),
               ),
-      
+
+              // 2. The Overlay Button (Only if showOverlay is true)
+              if (showOverlay)
+                Positioned(
+                  bottom: 8.h(context),
+                  right: 8.w(context),
+                  child: const PinOverlayButton(),
+                ),
             ],
           ),
+
           SizedBox(height: 5.h(context)),
+
+          // "More" Options Button
           GestureDetector(
             onTap: () {
-              // Show the Bottom Sheet
               showModalBottomSheet(
                 context: context,
-                backgroundColor: Colors.transparent, // Important for rounded corners
-                isScrollControlled: true, // Allows sheet to grow with content
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
                 builder: (context) => PinOptionsBottomSheet(pin: pin),
               );
             },
             child: Padding(
-              padding: EdgeInsets.all(4.w(context)), // Touch target padding
+              padding: EdgeInsets.all(4.w(context)),
               child: Icon(Icons.more_horiz, size: 20.sp(context), color: AppColors.black),
             ),
-          ),        ],
+          ),
+        ],
       ),
     );
   }
