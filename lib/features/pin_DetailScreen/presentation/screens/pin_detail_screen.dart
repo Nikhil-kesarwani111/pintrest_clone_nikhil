@@ -9,7 +9,7 @@ import '../../../home/domain/entities/pin_entity.dart';
 import '../../../home/presentation/providers/home_provider.dart';
 import '../../widgets/pin_detail_back_button.dart';
 import '../../widgets/pin_media_display.dart';
-import '../../widgets/pin_user_info.dart';
+import '../../widgets/Pin_User_Info/pin_user_info.dart';
 import '../../widgets/related_pins_grid.dart';
 
 class PinDetailScreen extends ConsumerStatefulWidget {
