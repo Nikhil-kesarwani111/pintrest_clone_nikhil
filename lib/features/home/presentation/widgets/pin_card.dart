@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../domain/entities/pin_entity.dart';
@@ -29,45 +30,50 @@ class PinCard extends StatelessWidget {
     final color = _parseColor(pin.colorHex);
     final double aspectRatio = (pin.width / pin.height);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: pin.isVideo
-                  ? VideoPin(
-                videoUrl: pin.videoUrl!,
-                placeholderColor: color,
-                aspectRatio: aspectRatio, // Pass ratio to Video
-              )
-                  : CachedNetworkImage(
-                imageUrl: pin.imageUrl,
-                fit: BoxFit.cover,
-
-                placeholder: (context, url) => AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: Container(
-                    color: color, // The static dominant color box
+    return GestureDetector(
+      onTap: () {
+        context.push('/pin_detail', extra: pin);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: pin.isVideo
+                    ? VideoPin(
+                  videoUrl: pin.videoUrl!,
+                  placeholderColor: color,
+                  aspectRatio: aspectRatio, // Pass ratio to Video
+                )
+                    : CachedNetworkImage(
+                  imageUrl: pin.imageUrl,
+                  fit: BoxFit.cover,
+      
+                  placeholder: (context, url) => AspectRatio(
+                    aspectRatio: aspectRatio,
+                    child: Container(
+                      color: color, // The static dominant color box
+                    ),
                   ),
-                ),
-
-                errorWidget: (context, url, error) => AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: Container(
-                    color: Colors.grey[200],
-                    child: const Icon(Icons.error),
+      
+                  errorWidget: (context, url, error) => AspectRatio(
+                    aspectRatio: aspectRatio,
+                    child: Container(
+                      color: Colors.grey[200],
+                      child: const Icon(Icons.error),
+                    ),
                   ),
                 ),
               ),
-            ),
-
-          ],
-        ),
-        SizedBox(height: 5.h(context)),
-        const Icon(Icons.more_horiz, size: 20, color: AppColors.black),
-      ],
+      
+            ],
+          ),
+          SizedBox(height: 5.h(context)),
+          const Icon(Icons.more_horiz, size: 20, color: AppColors.black),
+        ],
+      ),
     );
   }
 }

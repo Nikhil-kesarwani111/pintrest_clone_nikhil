@@ -6,6 +6,9 @@ import 'package:pintrest_clone_nikhil/features/Navigation/Screens/main_screen.da
 import 'package:pintrest_clone_nikhil/features/auth/presentation/screens/auth_screen.dart';
 import 'package:pintrest_clone_nikhil/features/auth/presentation/screens/clerk_auth_screen.dart';
 
+import '../../features/home/domain/entities/pin_entity.dart';
+import '../../features/pin_DetailScreen/presentation/screens/pin_detail_screen.dart';
+
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
@@ -51,6 +54,14 @@ final GoRouter router = GoRouter(
       path: '/home',
       name: 'home',
       builder: (context, state) => const MainScreen(),
+    ),
+    GoRoute(
+      path: '/pin_detail',
+      name: 'pin_detail',
+      builder: (context, state) {
+        final pin = state.extra as PinEntity;
+        return PinDetailScreen(pin: pin);
+      },
     ),
   ],
 );
