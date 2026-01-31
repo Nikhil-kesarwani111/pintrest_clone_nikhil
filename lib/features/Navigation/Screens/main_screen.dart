@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_colors.dart';
-import '../../../global/navigation/bottom_nav_bar.dart';
-import '../../../global/provider/nav_provider.dart';
 import '../../home/presentation/screens/home.dart';
+import '../Provider/nav_provider.dart';
+import '../widgets/navigation/bottom_nav_bar.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -12,23 +12,24 @@ class MainScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(navIndexProvider);
 
-    // List of screens for each tab
     final List<Widget> pages = [
-      const HomeScreen(),          // 0: Home
-      const Center(child: Text("Search Screen")), // 1: Search (Placeholder)
-      const Center(child: Text("Create Screen")), // 2: Create (Placeholder)
-      const Center(child: Text("Inbox Screen")),  // 3: Inbox (Placeholder)
-      const Center(child: Text("Profile Screen")),// 4: Profile (Placeholder)
+      const HomeScreen(),
+      const Center(child: Text("Search Screen")),
+      const Center(child: Text("Create Screen")),
+      const Center(child: Text("Inbox Screen")),
+      const Center(child: Text("Profile Screen")),
     ];
 
     return Scaffold(
       backgroundColor: AppColors.white,
 
+      // Standard Body
       body: IndexedStack(
         index: currentIndex,
         children: pages,
       ),
 
+      // Standard Static Bottom Bar (Does not move)
       bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
