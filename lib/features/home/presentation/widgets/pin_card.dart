@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../global/widgets/Pin_option_bottom_sheet/pin_options_bottom_sheet.dart';
 import '../../domain/entities/pin_entity.dart';
 import 'video_pin.dart';
 
@@ -71,8 +72,21 @@ class PinCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 5.h(context)),
-          const Icon(Icons.more_horiz, size: 20, color: AppColors.black),
-        ],
+          GestureDetector(
+            onTap: () {
+              // Show the Bottom Sheet
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent, // Important for rounded corners
+                isScrollControlled: true, // Allows sheet to grow with content
+                builder: (context) => PinOptionsBottomSheet(pin: pin),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.all(4.w(context)), // Touch target padding
+              child: Icon(Icons.more_horiz, size: 20.sp(context), color: AppColors.black),
+            ),
+          ),        ],
       ),
     );
   }
