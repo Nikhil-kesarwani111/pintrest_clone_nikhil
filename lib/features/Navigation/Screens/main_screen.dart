@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pintrest_clone_nikhil/features/inbox/presentation/screens/inbox_screen.dart';
 import 'package:pintrest_clone_nikhil/features/search/presentation/screen/search_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../home/presentation/screens/home.dart';
@@ -17,8 +18,8 @@ class MainScreen extends ConsumerWidget {
       const HomeScreen(),
       const SearchScreen(),
       const Center(child: Text("Create Screen")),
-      const Center(child: Text("Inbox Screen")),
-      const Center(child: Text("Profile Screen")),
+      const InboxScreen(),
+     const Center(child: Text("Profile Screen")),
     ];
 
     return Scaffold(
