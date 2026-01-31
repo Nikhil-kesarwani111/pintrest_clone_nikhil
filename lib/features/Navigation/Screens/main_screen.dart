@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pintrest_clone_nikhil/features/search/presentation/screen/search_screen.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../home/presentation/screens/home.dart';
 import '../Provider/nav_provider.dart';
@@ -14,7 +15,7 @@ class MainScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       const HomeScreen(),
-      const Center(child: Text("Search Screen")),
+      const SearchScreen(),
       const Center(child: Text("Create Screen")),
       const Center(child: Text("Inbox Screen")),
       const Center(child: Text("Profile Screen")),

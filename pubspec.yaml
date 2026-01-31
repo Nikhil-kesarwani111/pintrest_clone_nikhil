@@ -51,6 +51,7 @@ dependencies:
   custom_refresh_indicator: ^4.0.1
   share_plus: ^12.0.1
   url_launcher: ^6.3.2
+  dartz: ^0.10.1
 
 
 dev_dependencies:

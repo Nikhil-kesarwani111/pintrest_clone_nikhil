@@ -63,5 +63,6 @@ final GoRouter router = GoRouter(
         return PinDetailScreen(pin: pin);
       },
     ),
+
   ],
 );
