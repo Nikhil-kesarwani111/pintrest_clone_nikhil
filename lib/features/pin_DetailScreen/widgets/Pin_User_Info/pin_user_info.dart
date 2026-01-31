@@ -5,10 +5,10 @@ import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 import 'package:pintrest_clone_nikhil/features/pin_DetailScreen/widgets/Pin_User_Info/widget/love_button.dart';
 import 'package:pintrest_clone_nikhil/features/pin_DetailScreen/widgets/Pin_User_Info/widget/save_pin_button.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../global/widgets/more_options_sheet/Presentation/screen/more_options_sheet.dart';
+import '../../../../global/widgets/share_bottom_sheet/Presentation/screen/share_bottom_sheet.dart';
 import '../../../home/domain/entities/pin_entity.dart';
 import '../../Provider/pin_interaction_provider.dart';
-
-
 
 class PinUserInfo extends ConsumerWidget {
   final PinEntity pin;
@@ -17,7 +17,6 @@ class PinUserInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Watch specific state for this pin
     final pinState = ref.watch(pinInteractionProvider(pin.id));
 
     return Padding(
@@ -28,7 +27,6 @@ class PinUserInfo extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //  Interactive Love Button
           LoveButton(
             pinId: pin.id,
             isLoved: pinState.isLoved,
@@ -37,16 +35,29 @@ class PinUserInfo extends ConsumerWidget {
 
           SizedBox(width: 20.w(context)),
 
-          //  Standard Actions (Chat, Share, More)
-          _buildIconAction(context, CupertinoIcons.chat_bubble),
+          _ActionButton(
+            icon: CupertinoIcons.chat_bubble,
+            onTap: () {
+              // TODO: Implement chat feature
+            },
+          ),
+
           SizedBox(width: 20.w(context)),
-          _buildIconAction(context, Icons.share_outlined),
+
+          _ActionButton(
+            icon: Icons.share_outlined,
+            onTap: () => _showShareSheet(context),
+          ),
+
           SizedBox(width: 20.w(context)),
-          _buildIconAction(context, Icons.more_horiz),
+
+          _ActionButton(
+            icon: Icons.more_horiz,
+            onTap: () => _showMoreOptions(context),
+          ),
 
           const Spacer(),
 
-          //  Save/Profile Toggle
           SavePinButton(
             pinId: pin.id,
             isSaved: pinState.isSaved,
@@ -56,11 +67,40 @@ class PinUserInfo extends ConsumerWidget {
     );
   }
 
-  Widget _buildIconAction(BuildContext context, IconData icon) {
-    return Icon(
+  void _showShareSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => ShareBottomSheet(pin: pin),
+    );
+  }
+
+  void _showMoreOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => MoreOptionsSheet(pin: pin),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _ActionButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Icon(
         icon,
         color: AppColors.black,
-        size: 24.sp(context)
+        size: 24.sp(context),
+      ),
     );
   }
 }

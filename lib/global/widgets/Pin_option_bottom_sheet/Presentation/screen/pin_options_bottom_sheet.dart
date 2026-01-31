@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pintrest_clone_nikhil/core/utils/responsiveness.dart';
 import 'package:pintrest_clone_nikhil/global/widgets/Pin_option_bottom_sheet/widgets/option_tile.dart';
 import 'package:pintrest_clone_nikhil/global/widgets/Pin_option_bottom_sheet/widgets/report_tile.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../features/home/domain/entities/pin_entity.dart';
+import '../../../../../../core/constants/app_colors.dart';
+import '../../../../../features/home/domain/entities/pin_entity.dart';
 
 class PinOptionsBottomSheet extends StatelessWidget {
   final PinEntity pin;
