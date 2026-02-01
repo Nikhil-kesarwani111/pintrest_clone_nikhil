@@ -20,7 +20,7 @@ class _RotatingFourDotsState extends State<RotatingFourDots>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000), // Speed of one full rotation
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     )..repeat();
   }
@@ -66,3 +66,4 @@ class _RotatingFourDotsState extends State<RotatingFourDots>
     );
   }
 }
+

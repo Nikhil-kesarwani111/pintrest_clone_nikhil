@@ -3,6 +3,8 @@
 import 'package:clerk_flutter/clerk_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../global/widgets/rotating_dots_indicator.dart';
 
 
 class ClerkAuthScreen extends StatelessWidget {
@@ -22,8 +24,10 @@ class ClerkAuthScreen extends StatelessWidget {
                   context.go('/home');
                 }
               });
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: RotatingFourDots(
+                  dotColor: AppColors.primary,
+              ),
               );
             },
             signedOutBuilder: (context, authState) {

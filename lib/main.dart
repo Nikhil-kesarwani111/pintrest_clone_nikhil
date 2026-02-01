@@ -34,14 +34,15 @@ class MyAppLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClerkAuth(
-      config: ClerkAuthConfig(
-        publishableKey: dotenv.env['CLERK_PUBLISHABLE_KEY']!,
-      ),
+    return Container(
+      color: Colors.white,
+      child: ClerkAuth(
+        config: ClerkAuthConfig(
+          publishableKey: dotenv.env['CLERK_PUBLISHABLE_KEY']!,
+        ),
         child: const PinterestCloneApp(),
-
+      ),
     );
   }
 }
-
 

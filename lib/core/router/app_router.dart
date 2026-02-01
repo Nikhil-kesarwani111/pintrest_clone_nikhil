@@ -36,15 +36,7 @@ final GoRouter router = GoRouter(
       name: 'landing',
       builder: (context, state) => const AuthScreen(),
     ),
-    GoRoute(
-      path: '/splash',
-      name: 'splash',
-      builder: (context, state) => const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    ),
+   
     GoRoute(
       path: '/clerkAuth',
       name: 'clerkAuth',
