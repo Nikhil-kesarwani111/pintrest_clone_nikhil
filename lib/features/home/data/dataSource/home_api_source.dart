@@ -11,7 +11,7 @@ class HomeApiSource {
   Future<List<PinModel>> fetchCuratedPhotos(int page) async {
     final response = await _dioClient.get(
       ApiConstants.curatedPhotos,
-      queryParameters: {'page': page, 'per_page': 40},
+      queryParameters: {'page': page, 'per_page': 15},
     );
     return (response['photos'] as List)
         .map((json) => PinModel.fromJson(json))
@@ -22,7 +22,7 @@ class HomeApiSource {
   Future<List<PinModel>> fetchPopularVideos(int page) async {
     final response = await _dioClient.get(
       ApiConstants.popularVideos,
-      queryParameters: {'page': page, 'per_page': 50}, // Fetch fewer videos to mix in
+      queryParameters: {'page': page, 'per_page':20 }, // Fetch fewer videos to mix in
     );
     return (response['videos'] as List)
         .map((json) => PinModel.fromJson(json))
